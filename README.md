@@ -39,7 +39,7 @@ Run a docker container via docker-run multiple times. Works like docker-compose 
 
 There are many cases where you run a task repeatedly, but do not want to throw away the whole container. One frequent task is running tests in a docker container. You want to keep the installed node_modules files and then run the tests multiple times.
 
-`docker-multirun` is like `docker-run`, but reuses the volumes of the already-existing container. This way, generated files from the previous run are kept.
+`docker-multirun` is like [docker-run](https://docs.docker.com/engine/reference/run/), but reuses the volumes of the already-existing container. This way, generated files from the previous run are kept. This behavior is also known from [docker-compose](https://docs.docker.com/compose/).
 
 <!-- INSTALL/ -->
 ## Install
@@ -56,9 +56,28 @@ $ yarn add docker-multirun
 ## Usage
 
 ```bash
+# Using yarn
 $ npx docker-multirun node:12 bash -c "npm ci && npm test"
+
+# Using npm
 $ yarn docker-multirun node:12 bash -c "yarn --frozen-lockfile && yarn test"
+
+# Mounting volumes
+$ yarn docker-multirun node:12 -v $(pwd):/app -v /app/node_modules bash -c "yarn --frozen-lockfile && yarn test"
+[1/4] 🔍  Resolving packages...
+[2/4] 🚚  Fetching packages...
+[3/4] 🔗  Linking dependencies...
+
+# Run it again
+$ yarn docker-multirun node:12 -v $(pwd):/app -v /app/node_modules bash -c "yarn --frozen-lockfile && yarn test"
+[1/4] 🔍  Resolving packages...
+success Already up-to-date.
+
+# That was the fast lane!
 ```
+
+### Custom container name
+You can give your container a custom name by using the `--name` option, which is part of [docker-run](https://docs.docker.com/engine/reference/run/).
 
 <!-- LICENSE/ -->
 ## License

@@ -1,13 +1,13 @@
 {
   "name": "docker-multirun",
   "version": "1.0.0",
-  "description": "",
+  "description": "Run a docker container via docker-run multiple times. Works like docker-compose by keeping the container and reusing the volumes.",
   "repository": "dword-design/docker-multirun",
   "license": "MIT",
   "author": "Sebastian Landwehr <info@dword-design.de>",
   "main": "dist/index.js",
   "bin": {
-    "base": "./dist/cli.js"
+    "docker-multirun": "./dist/cli.js"
   },
   "files": [
     "dist"

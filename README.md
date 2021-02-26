@@ -34,8 +34,12 @@
 <!-- /BADGES -->
 
 <!-- DESCRIPTION/ -->
-
+Run a docker container via docker-run multiple times. Works like docker-compose by keeping the container and reusing the volumes.
 <!-- /DESCRIPTION -->
+
+There are many cases where you run a task repeatedly, but do not want to throw away the whole container. One frequent task is running tests in a docker container. You want to keep the installed node_modules files and then run the tests multiple times.
+
+`docker-multirun` is like `docker-run`, but reuses the volumes of the already-existing container. This way, generated files from the previous run are kept.
 
 <!-- INSTALL/ -->
 ## Install
@@ -48,6 +52,13 @@ $ npm install docker-multirun
 $ yarn add docker-multirun
 ```
 <!-- /INSTALL -->
+
+## Usage
+
+```bash
+$ npx docker-multirun node:12 bash -c "npm ci && npm test"
+$ yarn docker-multirun node:12 bash -c "yarn --frozen-lockfile && yarn test"
+```
 
 <!-- LICENSE/ -->
 ## License

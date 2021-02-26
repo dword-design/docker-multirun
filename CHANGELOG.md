@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/dword-design/docker-multirun/compare/v1.0.2...v1.0.3) (2021-02-26)
+
+
+### Bug Fixes
+
+* document volumes ([cc3610b](https://github.com/dword-design/docker-multirun/commit/cc3610be12ca80c067351027781cd9ad2aca3e74))
+
 ## [1.0.2](https://github.com/dword-design/docker-multirun/compare/v1.0.1...v1.0.2) (2021-02-26)
 
 

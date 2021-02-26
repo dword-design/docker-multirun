@@ -1,6 +1,6 @@
 {
   "name": "docker-multirun",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Run a docker container via docker-run multiple times. Works like docker-compose by keeping the container and reusing the volumes.",
   "repository": "dword-design/docker-multirun",
   "license": "MIT",

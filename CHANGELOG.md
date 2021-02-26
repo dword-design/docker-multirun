@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/dword-design/docker-multirun/compare/v1.0.0...v1.0.1) (2021-02-26)
+
+
+### Bug Fixes
+
+* add bin ([eced229](https://github.com/dword-design/docker-multirun/commit/eced2299b452a541a63d8fb9a3b102abcb361570))
+
 # 1.0.0 (2021-02-26)
 
 

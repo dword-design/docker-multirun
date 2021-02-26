@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import {
   first,
   includes,
@@ -10,7 +8,7 @@ import {
 import execa from 'execa'
 import P from 'path'
 
-const run = async () => {
+export default async () => {
   const volumeToCliArg = volume => {
     switch (volume.Type) {
       case 'volume':
@@ -72,6 +70,5 @@ const run = async () => {
     stdio: 'inherit',
   })
 }
-run()
 
 // babel-node test2.js alekzonder/puppeteer:latest "ls -la node_modules && touch node_modules/foo.txt" -v $(pwd):/app -v /app/node_modules --user root --tty

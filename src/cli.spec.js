@@ -5,7 +5,7 @@ import P from 'path'
 import { v4 as uuid } from 'uuid'
 import withLocalTmpDir from 'with-local-tmp-dir'
 
-const self = P.join('..', 'src', 'index.js')
+const self = P.join('..', 'src', 'cli.js')
 const runTest = test => () =>
   withLocalTmpDir(async () => {
     try {

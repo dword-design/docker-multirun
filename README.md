@@ -1,9 +1,9 @@
 <!-- TITLE/ -->
-# test-docker
+# docker-multirun
 <!-- /TITLE -->
 
 <!-- BADGES/ -->
-[![NPM version](https://img.shields.io/npm/v/test-docker.svg)](https://npmjs.org/package/test-docker)
+[![NPM version](https://img.shields.io/npm/v/docker-multirun.svg)](https://npmjs.org/package/docker-multirun)
 ![Linux macOS Windows compatible](https://img.shields.io/badge/os-linux%20%7C%C2%A0macos%20%7C%C2%A0windows-blue)
 [![Build status](https://github.com/dword-design/docker-multirun/workflows/build/badge.svg)](https://github.com/dword-design/docker-multirun/actions)
 [![Coverage status](https://img.shields.io/coveralls/dword-design/docker-multirun)](https://coveralls.io/github/dword-design/docker-multirun)
@@ -42,10 +42,10 @@
 
 ```bash
 # NPM
-$ npm install test-docker
+$ npm install docker-multirun
 
 # Yarn
-$ yarn add test-docker
+$ yarn add docker-multirun
 ```
 <!-- /INSTALL -->
 

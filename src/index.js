@@ -65,10 +65,7 @@ export default async () => {
       await execa.command(`docker container rm ${previousContainerName}`)
     }
   }
-  await new Promise(resolve => setTimeout(resolve, 2000))
   await execa.command(`docker start ${containerName} -a`, {
     stdio: 'inherit',
   })
 }
-
-// babel-node test2.js alekzonder/puppeteer:latest "ls -la node_modules && touch node_modules/foo.txt" -v $(pwd):/app -v /app/node_modules --user root --tty

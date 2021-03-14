@@ -6,16 +6,18 @@ import { v4 as uuid } from 'uuid'
 import withLocalTmpDir from 'with-local-tmp-dir'
 
 const self = P.join('..', 'src', 'cli.js')
-const runTest = test => () =>
-  withLocalTmpDir(async () => {
-    try {
-      await test()
-    } finally {
-      await execa
-        .command(`docker container rm ${P.basename(process.cwd())}`)
-        .catch(identity)
-    }
-  })
+const runTest = test =>
+  function () {
+    return withLocalTmpDir(async () => {
+      try {
+        await test.call(this)
+      } finally {
+        await execa
+          .command(`docker container rm ${P.basename(process.cwd())}`)
+          .catch(() => {})
+      }
+    })
+  }
 
 export default {
   bind: async () => {
@@ -34,6 +36,22 @@ export default {
       all: true,
     })
     expect(output.all).toEqual('foo')
+  },
+  async error() {
+    await outputFile('foo.js', "throw new Error('foo')")
+    let output
+    try {
+      await execa(
+        self,
+        ['-v', `${process.cwd()}:/app`, 'node:12', 'node', '/app/foo.js'],
+        {
+          all: true,
+        }
+      )
+    } catch (error) {
+      output = error.all
+    }
+    expect(output).toMatchSnapshot(this)
   },
   'multiple commands': async () => {
     const output = await execa(

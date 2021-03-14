@@ -2,4 +2,4 @@
 
 import api from '.'
 
-api()
+api().catch(() => process.exit(1))

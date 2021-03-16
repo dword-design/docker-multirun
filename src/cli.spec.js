@@ -53,6 +53,32 @@ export default {
     }
     expect(output).toMatchSnapshot(this)
   },
+  'existing old container': async () => {
+    await execa.command(
+      `docker container create --name ${P.basename(process.cwd())}_old node:12`
+    )
+    await execa.command(
+      `docker container create --name ${P.basename(process.cwd())} node:12`
+    )
+    try {
+      let output
+      try {
+        await execa.command(`${self} node:12`, {
+          all: true,
+        })
+      } catch (error) {
+        output = error.all
+      }
+      expect(output).toMatch(
+        /Error when allocating new name: Conflict\. The container name .* is already in use by container/
+      )
+    } finally {
+      await Promise.all([
+        execa.command(`docker container rm ${P.basename(process.cwd())}_old`),
+        execa.command(`docker container rm ${P.basename(process.cwd())}`),
+      ])
+    }
+  },
   'multiple commands': async () => {
     const output = await execa(
       self,

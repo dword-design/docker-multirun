@@ -49,7 +49,8 @@ export default async () => {
       }
     })
     await execa.command(
-      `docker container rename ${containerName} ${previousContainerName}`
+      `docker container rename ${containerName} ${previousContainerName}`,
+      { stderr: 'inherit' }
     )
   }
   try {

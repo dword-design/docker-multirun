@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/dword-design/docker-multirun/compare/v1.0.4...v1.0.5) (2021-03-16)
+
+
+### Bug Fixes
+
+* output errors ([#8](https://github.com/dword-design/docker-multirun/issues/8)) ([0e34b46](https://github.com/dword-design/docker-multirun/commit/0e34b46cf0c51475ddba077a4d227497fa2ea0e1))
+
 ## [1.0.4](https://github.com/dword-design/docker-multirun/compare/v1.0.3...v1.0.4) (2021-03-14)
 
 

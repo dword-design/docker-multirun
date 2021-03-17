@@ -3,6 +3,7 @@
   "version": "1.0.5",
   "description": "Run a docker container via docker-run multiple times. Works like docker-compose by keeping the container and reusing the volumes.",
   "repository": "dword-design/docker-multirun",
+  "funding": "https://www.buymeacoffee.com/dword",
   "license": "MIT",
   "author": "Sebastian Landwehr <info@dword-design.de>",
   "main": "dist/index.js",

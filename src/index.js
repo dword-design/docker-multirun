@@ -9,16 +9,6 @@ import execa from 'execa'
 import P from 'path'
 
 export default async () => {
-  const volumeToCliArg = volume => {
-    switch (volume.Type) {
-      case 'volume':
-        return `${volume.Name}:${volume.Destination}`
-      case 'bind':
-        return `${volume.Source}:${volume.Destination}`
-      default:
-        throw new Error(`Unknown mount type '${volume.Type}`)
-    }
-  }
   const args = process.argv |> slice(2)
   const nameIndex = args |> indexOf('--name')
   const containerName =
@@ -50,7 +40,10 @@ export default async () => {
     let volumeIndex = 0
     args.forEach((arg, index) => {
       if (['-v', '--volume'] |> includes(arg)) {
-        args[index + 1] = volumeToCliArg(containerData.Mounts[volumeIndex])
+        const volume = containerData.Mounts[volumeIndex]
+        if (volume.Type === 'volume') {
+          args[index + 1] = `${volume.Name}:${volume.Destination}`
+        }
         volumeIndex += 1
       }
     })

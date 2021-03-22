@@ -8,7 +8,7 @@ import {
   split,
 } from '@dword-design/functions'
 import execa from 'execa'
-import { outputFile } from 'fs-extra'
+import { outputFile, rename } from 'fs-extra'
 import P from 'path'
 import { v4 as uuid } from 'uuid'
 import withLocalTmpDir from 'with-local-tmp-dir'
@@ -118,6 +118,36 @@ export default {
         execa.command(`docker container rm ${P.basename(process.cwd())}`),
       ])
     }
+  },
+  'folder moved': async () => {
+    await outputFile('subdir/foo.js', '')
+    await execa(
+      P.join('..', self),
+      [
+        '--name',
+        P.basename(process.cwd()),
+        '-v',
+        `${P.resolve('subdir')}:/app`,
+        'node:12',
+        'node',
+        '/app/foo.js',
+      ],
+      { cwd: 'subdir' }
+    )
+    await rename('subdir', 'subdir2')
+    await execa(
+      P.join('..', self),
+      [
+        '--name',
+        P.basename(process.cwd()),
+        '-v',
+        `${P.resolve('subdir2')}:/app`,
+        'node:12',
+        'node',
+        '/app/foo.js',
+      ],
+      { cwd: 'subdir2', stdio: 'inherit' }
+    )
   },
   'multiple commands': async () => {
     const output = await execa(

@@ -91,10 +91,12 @@ export default {
   },
   'existing old container': async () => {
     await execa.command(
+      `docker container create --name ${P.basename(process.cwd())} node:12`
+    )
+    await execa.command(
       `docker container create --name ${P.basename(process.cwd())}_old node:12`
     )
-    await execa.command(`${self} node:12`, { all: true })
-    await execa.command(`docker container rm ${P.basename(process.cwd())}_old`)
+    await execa.command(`${self} node:12`)
   },
   'folder moved': async () => {
     await outputFile('subdir/foo.js', '')

@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/dword-design/docker-multirun/compare/v1.0.9...v1.0.10) (2021-03-22)
+
+
+### Bug Fixes
+
+* handle old container ([#15](https://github.com/dword-design/docker-multirun/issues/15)) ([24ed28d](https://github.com/dword-design/docker-multirun/commit/24ed28d268a957f76895a59d27d075578b0ea37e))
+
 ## [1.0.9](https://github.com/dword-design/docker-multirun/compare/v1.0.8...v1.0.9) (2021-03-22)
 
 

@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/dword-design/docker-multirun/compare/v1.0.8...v1.0.9) (2021-03-22)
+
+
+### Bug Fixes
+
+* fix path renaming ([#14](https://github.com/dword-design/docker-multirun/issues/14)) ([a56874f](https://github.com/dword-design/docker-multirun/commit/a56874f1a05426cbc8d3a517e78ab9019ebdede2))
+
 ## [1.0.8](https://github.com/dword-design/docker-multirun/compare/v1.0.7...v1.0.8) (2021-03-22)
 
 

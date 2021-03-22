@@ -47,10 +47,16 @@ export default async () => {
         volumeIndex += 1
       }
     })
-    await execa.command(
-      `docker container rename ${containerName} ${previousContainerName}`,
-      { stderr: 'inherit' }
-    )
+    try {
+      await execa.command(
+        `docker container rename ${containerName} ${previousContainerName}`
+      )
+    } catch {
+      await execa.command(`docker container rm -f ${previousContainerName}`)
+      await execa.command(
+        `docker container rename ${containerName} ${previousContainerName}`
+      )
+    }
   }
   try {
     await execa(

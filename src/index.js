@@ -27,6 +27,12 @@ export default async () => {
     args.splice(nameIndex, 2)
   }
   const previousContainerName = `${containerName}_old`
+  try {
+    await execa.command('docker version', { stderr: 'inherit' })
+  } catch (error) {
+    console.error(error.message)
+    throw error
+  }
   let containerData
   try {
     containerData =
@@ -54,13 +60,11 @@ export default async () => {
     )
   }
   try {
-    await execa('docker', [
-      'container',
-      'create',
-      '--name',
-      containerName,
-      ...args,
-    ])
+    await execa(
+      'docker',
+      ['container', 'create', '--name', containerName, ...args],
+      { stderr: 'inherit' }
+    )
   } finally {
     if (containerData !== undefined) {
       await execa.command(`docker container rm ${previousContainerName}`)

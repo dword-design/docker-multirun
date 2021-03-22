@@ -29,6 +29,7 @@
   "devDependencies": {
     "@dword-design/base": "^7.0.9",
     "fs-extra": "^9.1.0",
+    "p-wait-for": "^3.2.0",
     "uuid": "^8.3.2",
     "with-local-tmp-dir": "^2.2.15"
   },

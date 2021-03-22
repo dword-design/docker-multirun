@@ -9,6 +9,7 @@ import {
 } from '@dword-design/functions'
 import execa from 'execa'
 import { outputFile, rename } from 'fs-extra'
+import pWaitFor from 'p-wait-for'
 import P from 'path'
 import { v4 as uuid } from 'uuid'
 import withLocalTmpDir from 'with-local-tmp-dir'
@@ -38,6 +39,7 @@ const runTest = test =>
 export default {
   bind: async () => {
     await outputFile('foo.txt', '')
+    await execa.command('docker pull node:12')
     const output = await execa(
       self,
       ['-v', `${process.cwd()}:/app`, 'node:12', 'ls', '/app'],
@@ -47,16 +49,10 @@ export default {
     )
     expect(output.all).toEqual('foo.txt')
   },
-  command: async () => {
-    const output = await execa.command(`${self} node:12 echo foo`, {
-      all: true,
-    })
-    expect(output.all).toEqual('foo')
-  },
   'docker missing': async function () {
     let output
     try {
-      await execa(self, {
+      await execa.command(self, {
         all: true,
         env: { PATH: getModifiedPath() },
         extendEnv: false,
@@ -69,7 +65,7 @@ export default {
   'error in creation': async function () {
     let output
     try {
-      await execa(self, {
+      await execa.command(self, {
         all: true,
       })
     } catch (error) {
@@ -95,29 +91,12 @@ export default {
   },
   'existing old container': async () => {
     await execa.command(
-      `docker container create --name ${P.basename(process.cwd())}_old node:12`
-    )
-    await execa.command(
       `docker container create --name ${P.basename(process.cwd())} node:12`
     )
-    try {
-      let output
-      try {
-        await execa.command(`${self} node:12`, {
-          all: true,
-        })
-      } catch (error) {
-        output = error.all
-      }
-      expect(output).toMatch(
-        /Error when allocating new name: Conflict\. The container name .* is already in use by container/
-      )
-    } finally {
-      await Promise.all([
-        execa.command(`docker container rm ${P.basename(process.cwd())}_old`),
-        execa.command(`docker container rm ${P.basename(process.cwd())}`),
-      ])
-    }
+    await execa.command(
+      `docker container create --name ${P.basename(process.cwd())}_old node:12`
+    )
+    await execa.command(`${self} node:12`)
   },
   'folder moved': async () => {
     await outputFile('subdir/foo.js', '')
@@ -148,6 +127,42 @@ export default {
       ],
       { cwd: 'subdir2', stdio: 'inherit' }
     )
+  },
+  'multiple calls with bind volume': async () => {
+    const execution = () =>
+      execa(
+        self,
+        [
+          '-v',
+          '/app',
+          'node:12',
+          'bash',
+          '-c',
+          'ls /app && touch /app/bar.txt',
+        ],
+        {
+          all: true,
+        }
+      )
+    expect(execution() |> await |> property('all')).toEqual('')
+    await execution()
+    const childProcess = execution()
+    await pWaitFor(async () => {
+      try {
+        await execa.command(
+          `docker container inspect ${P.basename(process.cwd())}_old`
+        )
+        return true
+      } catch {
+        return false
+      }
+    })
+    const output = await childProcess
+    expect(output.all).toEqual('bar.txt')
+    await execa.command(`docker container inspect ${P.basename(process.cwd())}`)
+    await expect(
+      execa.command(`docker container inspect ${P.basename(process.cwd())}_old`)
+    ).rejects.toThrow()
   },
   'multiple commands': async () => {
     const output = await execa(
@@ -180,25 +195,10 @@ export default {
       await execa.command(`docker container rm ${name}`).catch(identity)
     }
   },
-  volume: async () => {
-    const execution = async () =>
-      execa(
-        self,
-        [
-          '-v',
-          '/app',
-          'node:12',
-          'bash',
-          '-c',
-          'ls /app && touch /app/bar.txt',
-        ],
-        {
-          all: true,
-        }
-      )
-      |> await
-      |> property('all')
-    expect(await execution()).toEqual('')
-    expect(await execution()).toEqual('bar.txt')
+  valid: async () => {
+    const output = await execa.command(`${self} node:12 echo foo`, {
+      all: true,
+    })
+    expect(output.all).toEqual('foo')
   },
 } |> mapValues(runTest)

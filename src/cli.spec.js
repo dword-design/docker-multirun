@@ -1,10 +1,26 @@
-import { endent, identity, mapValues, property } from '@dword-design/functions'
+import {
+  endent,
+  filter,
+  identity,
+  join,
+  mapValues,
+  property,
+  split,
+} from '@dword-design/functions'
 import execa from 'execa'
 import { outputFile } from 'fs-extra'
 import P from 'path'
 import { v4 as uuid } from 'uuid'
 import withLocalTmpDir from 'with-local-tmp-dir'
 
+const pathDelimiter = process.platform === 'win32' ? ';' : ':'
+const getModifiedPath = () =>
+  [
+    ...(process.env.PATH
+      |> split(pathDelimiter)
+      |> filter(path => !['/bin', '/usr/bin'].includes(path))),
+    process.cwd(),
+  ] |> join(pathDelimiter)
 const self = P.join('..', 'src', 'cli.js')
 const runTest = test =>
   function () {
@@ -37,7 +53,31 @@ export default {
     })
     expect(output.all).toEqual('foo')
   },
-  async error() {
+  'docker missing': async function () {
+    let output
+    try {
+      await execa(self, {
+        all: true,
+        env: { PATH: getModifiedPath() },
+        extendEnv: false,
+      })
+    } catch (error) {
+      output = error.all
+    }
+    expect(output).toMatchSnapshot(this)
+  },
+  'error in creation': async function () {
+    let output
+    try {
+      await execa(self, {
+        all: true,
+      })
+    } catch (error) {
+      output = error.all
+    }
+    expect(output).toMatchSnapshot(this)
+  },
+  'error in execution': async function () {
     await outputFile('foo.js', "throw new Error('foo')")
     let output
     try {

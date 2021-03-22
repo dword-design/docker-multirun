@@ -1,6 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`cli docker missing 1`] = `
+"Command failed with ENOENT: docker version
+spawn docker ENOENT"
+`;
+
 exports[`cli error 1`] = `
+"/app/foo.js:1
+throw new Error('foo')
+^
+
+Error: foo
+    at Object.<anonymous> (/app/foo.js:1:7)
+    at Module._compile (internal/modules/cjs/loader.js:999:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1027:10)
+    at Module.load (internal/modules/cjs/loader.js:863:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:708:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:60:12)
+    at internal/main/run_main_module.js:17:47"
+`;
+
+exports[`cli error in creation 1`] = `
+"\\"docker container create\\" requires at least 1 argument.
+See 'docker container create --help'.
+
+Usage:  docker container create [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Create a new container"
+`;
+
+exports[`cli error in execution 1`] = `
 "/app/foo.js:1
 throw new Error('foo')
 ^

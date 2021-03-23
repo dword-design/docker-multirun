@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/dword-design/docker-multirun/compare/v1.0.10...v1.0.11) (2021-03-23)
+
+
+### Bug Fixes
+
+* update dependency @dword-design/functions to v3 ([#16](https://github.com/dword-design/docker-multirun/issues/16)) ([ec119e8](https://github.com/dword-design/docker-multirun/commit/ec119e8918d639758ac955beff34afd21ab96e05))
+
 ## [1.0.10](https://github.com/dword-design/docker-multirun/compare/v1.0.9...v1.0.10) (2021-03-22)
 
 

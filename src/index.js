@@ -10,12 +10,15 @@ import P from 'path'
 
 export default async () => {
   const args = process.argv |> slice(2)
+
   const nameIndex = args |> indexOf('--name')
+
   const containerName =
     nameIndex === -1 ? P.basename(process.cwd()) : args[nameIndex + 1]
   if (nameIndex !== -1) {
     args.splice(nameIndex, 2)
   }
+
   const previousContainerName = `${containerName}_old`
   try {
     await execa.command('docker version', { stderr: 'inherit' })

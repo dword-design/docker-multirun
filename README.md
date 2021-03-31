@@ -94,7 +94,7 @@ You can give your container a custom name by using the `--name` option, which is
 <!-- LICENSE/ -->
 ## Contribute
 
-Are you missing something or want to contribute? Feel free to file an [issue](https://github.com/dword-design/docker-multirun/issues) or [pull request](https://github.com/dword-design/docker-multirun/pulls)! ⚙️
+Are you missing something or want to contribute? Feel free to file an [issue](https://github.com/dword-design/docker-multirun/issues) or a [pull request](https://github.com/dword-design/docker-multirun/pulls)! ⚙️
 
 ## Support
 

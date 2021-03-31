@@ -15,6 +15,7 @@ import { v4 as uuid } from 'uuid'
 import withLocalTmpDir from 'with-local-tmp-dir'
 
 const pathDelimiter = process.platform === 'win32' ? ';' : ':'
+
 const getModifiedPath = () =>
   [
     ...(process.env.PATH
@@ -22,7 +23,9 @@ const getModifiedPath = () =>
       |> filter(path => !['/bin', '/usr/bin'].includes(path))),
     process.cwd(),
   ] |> join(pathDelimiter)
+
 const self = P.join('..', 'src', 'cli.js')
+
 const runTest = test =>
   function () {
     return withLocalTmpDir(async () => {
@@ -40,6 +43,7 @@ export default {
   bind: async () => {
     await outputFile('foo.txt', '')
     await execa.command('docker pull node:12')
+
     const output = await execa(
       self,
       ['-v', `${process.cwd()}:/app`, 'node:12', 'ls', '/app'],
@@ -146,17 +150,20 @@ export default {
       )
     expect(execution() |> await |> property('all')).toEqual('')
     await execution()
+
     const childProcess = execution()
     await pWaitFor(async () => {
       try {
         await execa.command(
           `docker container inspect ${P.basename(process.cwd())}_old`
         )
+
         return true
       } catch {
         return false
       }
     })
+
     const output = await childProcess
     expect(output.all).toEqual('bar.txt')
     await execa.command(`docker container inspect ${P.basename(process.cwd())}`)

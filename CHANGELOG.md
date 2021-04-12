@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/dword-design/docker-multirun/compare/v1.0.12...v1.0.13) (2021-04-12)
+
+
+### Bug Fixes
+
+* lock file maintenance ([#21](https://github.com/dword-design/docker-multirun/issues/21)) ([404990f](https://github.com/dword-design/docker-multirun/commit/404990f8cf8002a4902380be09a4b00aa9b5295c))
+
 ## [1.0.12](https://github.com/dword-design/docker-multirun/compare/v1.0.11...v1.0.12) (2021-03-31)
 
 

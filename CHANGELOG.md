@@ -1,3 +1,19 @@
+# [2.0.0](https://github.com/dword-design/docker-multirun/compare/v1.0.14...v2.0.0) (2021-05-03)
+
+
+### Bug Fixes
+
+* update dependency @dword-design/base to v8 ([#29](https://github.com/dword-design/docker-multirun/issues/29)) ([87f9421](https://github.com/dword-design/docker-multirun/commit/87f9421825fdf87ad55f2499ddf05934c2a90d77))
+
+
+### BREAKING CHANGES
+
+* require Node.js >= 12
+
+Co-authored-by: Renovate Bot <bot@renovateapp.com>
+Co-authored-by: Sebastian Landwehr <info@dword-design.de>
+Co-authored-by: GitHub Actions <actions@github.com>
+
 ## [1.0.14](https://github.com/dword-design/docker-multirun/compare/v1.0.13...v1.0.14) (2021-04-26)
 
 

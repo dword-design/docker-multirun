@@ -1,3 +1,12 @@
+## [2.0.1](https://github.com/dword-design/docker-multirun/compare/v2.0.0...v2.0.1) (2021-05-04)
+
+
+### Bug Fixes
+
+* update dependency @dword-design/functions to v4 ([#30](https://github.com/dword-design/docker-multirun/issues/30)) ([57d05f2](https://github.com/dword-design/docker-multirun/commit/57d05f2cf345e5df2a5df3040f9150855f7238fc))
+* update dependency fs-extra to v10 ([#31](https://github.com/dword-design/docker-multirun/issues/31)) ([f092fdb](https://github.com/dword-design/docker-multirun/commit/f092fdbde57106a72a60c02ddacef858704eecc4))
+* update dependency with-local-tmp-dir to v4 ([#32](https://github.com/dword-design/docker-multirun/issues/32)) ([a988813](https://github.com/dword-design/docker-multirun/commit/a988813f78809832fbe45d3a8fb0bcdad64168a0))
+
 # [2.0.0](https://github.com/dword-design/docker-multirun/compare/v1.0.14...v2.0.0) (2021-05-03)
 
 

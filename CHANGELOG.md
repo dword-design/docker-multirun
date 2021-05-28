@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/dword-design/docker-multirun/compare/v2.0.1...v2.0.2) (2021-05-28)
+
+
+### Bug Fixes
+
+* update config files ([0ce76e1](https://github.com/dword-design/docker-multirun/commit/0ce76e1124dcd68c1b70f5cc42c647cd0da62204))
+
 ## [2.0.1](https://github.com/dword-design/docker-multirun/compare/v2.0.0...v2.0.1) (2021-05-04)
 
 
